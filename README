@@ -9,6 +9,7 @@ Update the password line in files/my.cnf to reflect your zabbix user's mysql pas
 
 
 == Usage ==
+
 1) Node must have $zabbix_server defined
 
 $zabbix_server = "zabbixserver.domain"
@@ -17,7 +18,16 @@ $zabbix_server = "zabbixserver.domain"
 
 include zabbix::agent
 
-3) add mysql zabbix checks to node:
+=== Added mysql checks to node ===
+The mysql class inherits agent.
+
+The checks in templates/userparameter_mysql_conf.erb are examples that are packaged with Zabbix
+
+Additional checks can be added in the node definition.  This example adds a check for mediawiki user count
+
+    $zabbix_mysql_user_parameters =  {
+        item1 => { 'name' => 'mediawiki.usercount[*]', 'command' => 'mysql -B -s -e "SELECT count(*) FROM user" $1'},
+    }   
 
 include zabbix::mysql
 
