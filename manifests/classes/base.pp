@@ -1,5 +1,4 @@
 class zabbix::base {
-    $zabbix_server = "itscnetmon.tamu.edu"
     $zabbix_config_dir = "/etc/zabbix"
 	$zabbix_user_home_dir = "/var/lib/zabbix"
     $zabbix_log_dir = "/var/log/zabbix/"

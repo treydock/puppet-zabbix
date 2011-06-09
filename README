@@ -9,12 +9,15 @@ Update the password line in files/my.cnf to reflect your zabbix user's mysql pas
 
 
 == Usage ==
+1) Node must have $zabbix_server defined
 
-To add the agent to a node:
+$zabbix_server = "zabbixserver.domain"
+
+2) Add agent class to node
 
 include zabbix::agent
 
-To add mysql zabbix checks to node:
+3) add mysql zabbix checks to node:
 
 include zabbix::mysql
 
