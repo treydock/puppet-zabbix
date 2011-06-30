@@ -38,6 +38,7 @@ class zabbix::agent inherits zabbix::base {
         archive     => 'true',
         create      => '0664 zabbix zabbix',
         options     => [ 'missingok', 'notifempty', 'dateext' ],
+		require		=> Class['logrotate'],
     }   
 
 }
