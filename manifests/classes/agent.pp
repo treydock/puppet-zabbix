@@ -26,9 +26,10 @@ class zabbix::agent inherits zabbix::base {
 
     service {
         "zabbix_agentd":
-            enable 	=> true,
-            ensure 	=> running,
-            require => [ Package["zabbix-agent"], File["$zabbix_config_dir"], File["$zabbix_log_dir"], File["$zabbix_pid_dir"] ];
+            enable 		=> true,
+            ensure 		=> running,
+			hasstatus	=> false,
+            require 	=> [ Package["zabbix-agent"], File["$zabbix_config_dir"], File["$zabbix_log_dir"], File["$zabbix_pid_dir"] ];
     }
 	
     logrotate::file { 'zabbix_agent':
