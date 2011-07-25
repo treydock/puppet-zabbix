@@ -33,13 +33,14 @@ class zabbix::base {
             group 	=> zabbix,
             mode 	=> 700,
 			require => User["zabbix"];
+
 	}
 
 	user { 'zabbix':
 		ensure		=> 'present',
 		home		=> $zabbix_user_home_dir,
 		password    => '!!',
-		shell       => '/sbin/nologin',
+		shell       => '/bin/bash',
 		gid			=> 'zabbix',
 		managehome	=> 'true',	
 	}

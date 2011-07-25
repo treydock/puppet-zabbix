@@ -32,15 +32,5 @@ class zabbix::agent inherits zabbix::base {
             require 	=> [ Package["zabbix-agent"], File["$zabbix_config_dir"], File["$zabbix_log_dir"], File["$zabbix_pid_dir"] ];
     }
 	
-    logrotate::file { 'zabbix_agent':
-        log         => '/var/log/zabbix/zabbix_agent.log*',
-        interval    => 'weekly',
-        rotation    => '52',
-        archive     => 'true',
-        create      => '0664 zabbix zabbix',
-        options     => [ 'missingok', 'notifempty', 'dateext' ],
-		require		=> Class['logrotate'],
-    }   
-
 }
 
