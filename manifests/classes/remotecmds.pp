@@ -17,6 +17,7 @@ class zabbix::remotecmds inherits zabbix::agent {
 
         "$zabbix_user_home_dir/bin/start_puppet":
             ensure  => present,
+			source	=> 'puppet:///modules/zabbix/start_puppet',
             owner   => zabbix,
             group   => zabbix,
             mode    => 770,
