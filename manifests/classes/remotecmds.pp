@@ -1,11 +1,13 @@
 class zabbix::remotecmds inherits zabbix::agent {
 
 /* This allows zabbix to start the puppet service if it is down */
+/*
     sudo::directive { "zabbix-puppet":
         ensure  => present,
         content => "zabbix ALL=NOPASSWD: /var/lib/zabbix/bin/start_puppet",
        # source  => "puppet:///modules/zabbix/zabbix_sudocmd",
     }   
+*/
 
     file {
         "$zabbix_user_home_dir/bin":
