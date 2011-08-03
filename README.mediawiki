@@ -12,17 +12,23 @@ Update the password line in files/my.cnf to reflect your zabbix user's mysql pas
 
 1) Node must have $zabbix_server defined
 
+<pre>
 $zabbix_server = "zabbixserver.domain"
+</pre>
 
 2) Add agent class to node
 
+<pre>
 include zabbix::agent
+</pre>
 
 === Puppet specific remote command ===
 
 To allow Zabbix to restart the puppet daemon, should it stop, do the following
 
+<pre>
 include zabbix::remotecmds
+</pre>
 
 See manifests/classes/remotecmds.pp for more information
 
@@ -30,10 +36,12 @@ See manifests/classes/remotecmds.pp for more information
 
 Additional user parameters can be added by use of a definition.  Below is an example of how to add a user parameter file to a node
 
+<pre>
 	zabbix::userparameter { 'userparameters_nut':
 		ensure	=> present,
 		source	=> 'puppet:///files/userparameters_nut.conf'
 	}
+</pre>
 
 === Added mysql checks to node ===
 
@@ -43,9 +51,11 @@ The checks in templates/userparameter_mysql_conf.erb are examples that are packa
 
 Additional checks can be added in the node definition.  This example adds a check for mediawiki user count
 
+<pre>
     $zabbix_mysql_user_parameters =  {
         item1 => { 'name' => 'mediawiki.usercount[*]', 'command' => 'mysql -B -s -e "SELECT count(*) FROM user" $1'},
     }   
+</pre>
 
 include zabbix::mysql
 
