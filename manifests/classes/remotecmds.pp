@@ -1,11 +1,17 @@
 class zabbix::remotecmds inherits zabbix::agent {
 
 /* This allows zabbix to start the puppet service if it is down */
-/*
+
+/* This sudo portion relies on https://github.com/treydock/puppet-sudo, if you have another means
+	to add this sudo directive, I would recommend that
+
+The file zabbix_sudocmd contains this line...
+
+zabbix ALL=NOPASSWD: /var/lib/zabbix/bin/start_puppet
+
     sudo::directive { "zabbix-puppet":
         ensure  => present,
-        content => "zabbix ALL=NOPASSWD: /var/lib/zabbix/bin/start_puppet",
-       # source  => "puppet:///modules/zabbix/zabbix_sudocmd",
+        source  => "puppet:///modules/zabbix/zabbix_sudocmd",
     }   
 */
 
@@ -27,6 +33,5 @@ class zabbix::remotecmds inherits zabbix::agent {
     }
 
 /* End puppet specific remote command */
-
 
 }
