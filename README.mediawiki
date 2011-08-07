@@ -43,6 +43,8 @@ Additional user parameters can be added by use of a definition.  Below is an exa
 	}
 </pre>
 
+I've included an example userparameter file '''files/userparameter_mounted.conf''' as an example
+
 === Added mysql checks to node ===
 
 The mysql class inherits agent.
