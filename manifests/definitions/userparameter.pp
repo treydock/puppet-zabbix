@@ -22,5 +22,6 @@ define zabbix::userparameter (
         	default => $source,
       	},
       	require => File["${zabbix::params::zabbix_userparameter_config_dir}"],
+		notify	=> Service['zabbix_agentd'],
     }
 }
