@@ -37,10 +37,11 @@ See manifests/classes/remotecmds.pp for more information
 Additional user parameters can be added by use of a definition.  Below is an example of how to add a user parameter file to a node
 
 <pre>
-	zabbix::userparameter { 'userparameters_nut':
-		ensure	=> present,
-		source	=> 'puppet:///files/userparameters_nut.conf'
-	}
+	zabbix::userparameter {
+		'userparameter_mounted':
+			ensure	=> present,
+			source	=> 'puppet:///modules/zabbix/userparameter_mounted.conf';
+	}			
 </pre>
 
 I've included an example userparameter file '''files/userparameter_mounted.conf''' as an example
