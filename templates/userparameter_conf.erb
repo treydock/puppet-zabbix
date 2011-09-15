@@ -1,0 +1,7 @@
+# Custom items defined per host via Puppet
+<% if user_params and not user_params.empty? -%>
+<% user_params.each do |key, value_hash| -%> 
+UserParameter=<%= value_hash['name'] %>,<%= value_hash['command'] %>
+<% end -%> 
+<% end -%>
+

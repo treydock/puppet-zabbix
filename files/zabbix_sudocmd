@@ -1,2 +1,2 @@
-zabbix ALL=NOPASSWD: /var/lib/zabbix/bin/start_puppet
+zabbix ALL=NOPASSWD: /sbin/service
 
