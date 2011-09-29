@@ -1,6 +1,6 @@
-= Zabbix Puppet module =
+# Zabbix Puppet module #
 
-== Installation ==
+## Installation ##
 
 Place this in your Puppet installation's module directory
 
@@ -8,45 +8,46 @@ Rename files/my.cnf.example to files/my.cnf
 Update the password line in files/my.cnf to reflect your zabbix user's mysql password
 
 
-== Usage ==
+## Usage ##
 
 1) Node must have $zabbix_server defined
 
-<pre>
+```ruby
 $zabbix_server = "zabbixserver.domain"
-</pre>
+```
 
 2) Add agent class to node
 
-<pre>
+```ruby
 include zabbix::agent
-</pre>
+```
 
-=== Puppet specific remote command ===
+### Puppet specific remote command ###
+
 
 To allow Zabbix to restart the puppet daemon, should it stop, do the following
 
-<pre>
+```ruby
 include zabbix::remotecmds
-</pre>
+```
 
 See manifests/classes/remotecmds.pp for more information
 
-=== Adding user paremeter checks ===
+### Adding user paremeter checks ###
 
 Additional user parameters can be added by use of a definition.  Below is an example of how to add a user parameter file to a node
 
-<pre>
+```ruby
 	zabbix::userparameter {
 		'userparameter_mounted':
 			ensure	=> present,
 			source	=> 'puppet:///modules/zabbix/userparameter_mounted.conf';
 	}			
-</pre>
+```
 
 I've included an example userparameter file '''files/userparameter_mounted.conf''' as an example
 
-=== Added mysql checks to node ===
+### Added mysql checks to node ###
 
 The mysql class inherits agent.
 
@@ -54,12 +55,12 @@ The checks in templates/userparameter_mysql_conf.erb are examples that are packa
 
 Additional checks can be added in the node definition.  This example adds a check for mediawiki user count
 
-<pre>
+```ruby
     $zabbix_mysql_user_parameters =  {
         item1 => { 'name' => 'mediawiki.usercount[*]', 'command' => 'mysql -B -s -e "SELECT count(*) FROM user" $1'},
     }   
-</pre>
 
 include zabbix::mysql
 
+```
 
