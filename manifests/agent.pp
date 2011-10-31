@@ -21,6 +21,7 @@ class zabbix::agent inherits zabbix {
             group 	=> root,
             mode 	=> 644,
             content => template("zabbix/zabbix_agentd_conf.erb"),
+			notify	=> Service['zabbix_agentd'],
             require => [ Package["zabbix-agent"], File["$zabbix_config_dir"] ];
 	}
 
