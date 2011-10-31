@@ -4,7 +4,10 @@ class zabbix::proxy inherits zabbix {
     package {
         "zabbix-proxy":
             ensure	=> installed,
-			require	=> Yumrepo['itsc']
+			require	=> Yumrepo['itsc'];
+		'fping':
+			ensure	=> installed,
+			require	=> Yumrepo['epel'];
     }
 
 	mysql::db { 'zabbix':
@@ -13,6 +16,7 @@ class zabbix::proxy inherits zabbix {
 		host		=> 'localhost',
 		grant		=> ['all'],
   		charset   	=> 'utf8',
+		sql			=> '/usr/share/zabbix/mysql.sql',
 	}
 
     file {
@@ -31,7 +35,7 @@ class zabbix::proxy inherits zabbix {
             ensure 		=> running,
 			hasstatus	=> true,
 			hasrestart	=> true,
-            require 	=> [ Package["zabbix-proxy"], File["$zabbix_proxy_conf"] ];
+            require 	=> [ Package["zabbix-proxy"], File["$zabbix_proxy_conf"], Database['zabbix'] ];
     }
 	
 }
