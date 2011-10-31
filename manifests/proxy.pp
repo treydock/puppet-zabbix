@@ -16,7 +16,14 @@ class zabbix::proxy inherits zabbix {
 		host		=> 'localhost',
 		grant		=> ['all'],
   		charset   	=> 'utf8',
-		sql			=> '/usr/share/zabbix/mysql.sql',
+	}
+
+	exec{ 'initialize_proxy_db':
+		command		=> "mysql -u root zabbix < /usr/share/zabbix/mysql.sql",
+		refreshonly	=> true,
+      	unless		=> "mysql -u root -B -s -r -e \"SELECT EXISTS(SELECT * FROM zabbix.history)\"",
+      	path      	=> '/usr/local/sbin:/usr/bin',
+		require		=> Database['zabbix'],
 	}
 
     file {
@@ -35,6 +42,7 @@ class zabbix::proxy inherits zabbix {
             ensure 		=> running,
 			hasstatus	=> true,
 			hasrestart	=> true,
+			before		=> Exec['initialize_proxy_db'],
             require 	=> [ Package["zabbix-proxy"], File["$zabbix_proxy_conf"], Database['zabbix'] ];
     }
 	
