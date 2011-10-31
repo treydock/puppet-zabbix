@@ -79,7 +79,11 @@ LogRemoteCommands=1
 # Default:
 # Server=
 
+<% if has_variable?('zabbix_proxy') -%>
+Server=<%= zabbix_proxy %>, <%= zabbix_server %>
+<% else -%>
 Server=<%= zabbix_server %>
+<% end -%>
 
 ### Option: Hostname
 #	Unique, case sensitive hostname.
