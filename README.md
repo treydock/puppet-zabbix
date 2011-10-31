@@ -1,5 +1,9 @@
 # Zabbix Puppet module #
 
+## Requirements ##
+
+The zabbix::puppet module relies on puppetlabs-mysql, see https://github.com/puppetlabs/puppetlabs-mysql
+
 ## Installation ##
 
 Place this in your Puppet installation's module directory
@@ -8,12 +12,12 @@ Rename files/my.cnf.example to files/my.cnf
 Update the password line in files/my.cnf to reflect your zabbix user's mysql password
 
 
-## Usage ##
+## Usage - Zabbix Agent ##
 
 1) Node must have $zabbix_server defined
 
 ```ruby
-$zabbix_server = "zabbixserver.domain"
+$zabbix_server 			= "zabbixserver.domain"
 ```
 
 2) Add agent class to node
@@ -62,5 +66,20 @@ Additional checks can be added in the node definition.  This example adds a chec
 
 include zabbix::mysql
 
+```
+
+## Usage - Zabbix Proxy ##
+
+1) Node must have $zabbix_server and $zabbix_proxy_db_pass defined
+
+```ruby
+$zabbix_server 			= "zabbixserver.domain"
+$zabbix_proxy_db_pass 	= "password"
+```
+
+2) Add agent class to node
+
+```ruby
+include zabbix::proxy
 ```
 
